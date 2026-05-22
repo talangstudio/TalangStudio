@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Kelola Sistem - License Manager</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="sidebar">
+        <div class="sb-brand"><h2>🔐 License Manager</h2><p>Roblox License System v1.0</p></div>
+        <div class="nav-sec">
+            <div class="nav-sec-title">Menu Utama</div>
+            <a href="dashboard.html" class="nav-item"><span class="nav-icon">📊</span> Dashboard</a>
+            <a href="systems.html" class="nav-item active"><span class="nav-icon">🎮</span> Kelola Sistem</a>
+            <a href="keys.html" class="nav-item"><span class="nav-icon">🔑</span> Lisensi Key</a>
+        </div>
+        <div class="nav-sec">
+            <div class="nav-sec-title">Monitoring</div>
+            <a href="logs.html" class="nav-item"><span class="nav-icon">📋</span> Log Aktivitas <span class="ndot"></span></a>
+            <a href="transfer.html" class="nav-item"><span class="nav-icon">🔄</span> Transfer Key</a>
+        </div>
+        <div class="nav-sec">
+            <div class="nav-sec-title">Lainnya</div>
+            <a href="settings.html" class="nav-item"><span class="nav-icon">⚙️</span> Pengaturan</a>
+            <a href="#" class="nav-item" onclick="logout()"><span class="nav-icon">🚪</span> Keluar</a>
+        </div>
+    </aside>
+    <main class="main">
+        <div class="ph">
+            <div>
+                <h1>🎮 <span>Kelola Sistem</span></h1>
+                <p class="ph-sub">Kelola semua sistem/produk Roblox Anda</p>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="openAddSystem()">➕ Tambah Sistem</button>
+        </div>
+        <div class="sys-grid" id="systems-grid">
+            <div class="loading">⏳ Memuat...</div>
+        </div>
+    </main>
+</div>
+
+<!-- Modal Tambah/Edit Sistem -->
+<div id="m-system" class="modal-bg hide">
+    <div class="modal-box">
+        <div class="modal-hd">
+            <h3 id="m-system-title">🎮 Tambah Sistem Baru</h3>
+            <button class="modal-close" onclick="closeModal('m-system')">×</button>
+        </div>
+        <div class="modal-bd">
+            <input type="hidden" id="sys-id">
+            <div class="form-g">
+                <label class="inp-label">Icon (Emoji)</label>
+                <input type="text" class="inp" id="sys-icon" placeholder="🎮" maxlength="2" value="🎮">
+            </div>
+            <div class="form-g">
+                <label class="inp-label">Nama Sistem *</label>
+                <input type="text" class="inp" id="sys-name" placeholder="Contoh: Gun System Pro">
+            </div>
+            <div class="form-g">
+                <label class="inp-label">Deskripsi</label>
+                <input type="text" class="inp" id="sys-desc" placeholder="Deskripsi singkat sistem...">
+            </div>
+            <div class="form-g">
+                <label class="inp-label">Versi</label>
+                <input type="text" class="inp" id="sys-ver" placeholder="v1.0" value="v1.0">
+            </div>
+        </div>
+        <div class="modal-ft">
+            <button class="btn btn-gray btn-sm" onclick="closeModal('m-system')">Batal</button>
+            <button class="btn btn-primary btn-sm" onclick="saveSystem()">💾 Simpan</button>
+        </div>
+    </div>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/systems.js"></script>
+</body>
+</html>

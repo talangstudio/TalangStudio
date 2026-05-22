@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📋 Log Aktivitas - License Manager</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="sidebar">
+        <div class="sb-brand"><h2>🔐 License Manager</h2><p>Roblox License System v1.0</p></div>
+        <div class="nav-sec">
+            <div class="nav-sec-title">Menu Utama</div>
+            <a href="dashboard.html" class="nav-item"><span class="nav-icon">📊</span> Dashboard</a>
+            <a href="systems.html" class="nav-item"><span class="nav-icon">🎮</span> Kelola Sistem</a>
+            <a href="keys.html" class="nav-item"><span class="nav-icon">🔑</span> Lisensi Key</a>
+        </div>
+        <div class="nav-sec">
+            <div class="nav-sec-title">Monitoring</div>
+            <a href="logs.html" class="nav-item active"><span class="nav-icon">📋</span> Log Aktivitas <span class="ndot"></span></a>
+            <a href="transfer.html" class="nav-item"><span class="nav-icon">🔄</span> Transfer Key</a>
+        </div>
+        <div class="nav-sec">
+            <div class="nav-sec-title">Lainnya</div>
+            <a href="settings.html" class="nav-item"><span class="nav-icon">⚙️</span> Pengaturan</a>
+            <a href="#" class="nav-item" onclick="logout()"><span class="nav-icon">🚪</span> Keluar</a>
+        </div>
+    </aside>
+    <main class="main">
+        <div class="ph">
+            <div>
+                <h1>📋 <span>Log Aktivitas</span></h1>
+                <p class="ph-sub">Pantau semua aktivitas lisensi secara real-time</p>
+            </div>
+            <button class="btn btn-gray btn-sm" onclick="loadLogs()">🔄 Refresh</button>
+        </div>
+        <div class="search-row">
+            <input type="text" class="inp" id="search-log" placeholder="🔍 Cari username, key, atau maps..." 
+                   style="max-width:380px" oninput="filterLogs()">
+            <div class="filters">
+                <button class="fil-btn act" onclick="filterByAction('',this)">Semua</button>
+                <button class="fil-btn" onclick="filterByAction('activated',this)">✅ Aktivasi</button>
+                <button class="fil-btn" onclick="filterByAction('heartbeat',this)">🔄 Heartbeat</button>
+                <button class="fil-btn" onclick="filterByAction('rejected',this)">⚠️ Ditolak</button>
+                <button class="fil-btn" onclick="filterByAction('bypass_attempt',this)">🚫 Bypass</button>
+                <button class="fil-btn" onclick="filterByAction('transfer_request',this)">🔄 Transfer</button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body" id="logs-container">
+                <div class="loading">⏳ Memuat...</div>
+            </div>
+        </div>
+    </main>
+</div>
+<script src="js/app.js"></script>
+<script src="js/logs.js"></script>
+</body>
+</html>

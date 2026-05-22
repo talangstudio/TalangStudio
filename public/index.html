@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔐 License Manager - Login</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="login-page">
+    <div class="login-wrap">
+        <div class="login-box">
+            <div class="login-ico">🔐</div>
+            <div class="login-title">License Manager</div>
+            <div class="login-sub">Sistem Manajemen Lisensi Roblox</div>
+            <div id="login-error" class="alert alert-danger" style="display:none"></div>
+            <div class="form-g">
+                <label class="inp-label">🔑 Kata Sandi Admin</label>
+                <input type="password" class="inp" id="password" placeholder="Masukkan kata sandi..." 
+                       onkeypress="if(event.key==='Enter')doLogin()">
+            </div>
+            <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="doLogin()" id="login-btn">
+                🚀 Masuk ke Dashboard
+            </button>
+            <p style="margin-top:18px;font-size:11px;color:var(--text3);">🛡️ Dilindungi enkripsi end-to-end</p>
+        </div>
+    </div>
+    <script>
+        // Cek kalau sudah login
+        if (localStorage.getItem('admin_token')) {
+            window.location.href = '/dashboard.html';
+        }
+
+        async function doLogin() {
+            const password = document.getElementById('password').value;
+            const btn = document.getElementById('login-btn');
+            const errEl = document.getElementById('login-error');
+
+            if (!password) {
+                errEl.textContent = 'Masukkan kata sandi terlebih dahulu';
+                errEl.style.display = 'block';
+                return;
+            }
+
+            btn.textContent = '⏳ Memproses...';
+            btn.disabled = true;
+
+            try {
+                const res = await fetch('/api/admin/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password })
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    localStorage.setItem('admin_token', data.token);
+                    window.location.href = '/dashboard.html';
+                } else {
+                    errEl.textContent = data.message || 'Kata sandi salah';
+                    errEl.style.display = 'block';
+                    btn.textContent = '🚀 Masuk ke Dashboard';
+                    btn.disabled = false;
+                }
+            } catch {
+                errEl.textContent = 'Gagal terhubung ke server';
+                errEl.style.display = 'block';
+                btn.textContent = '🚀 Masuk ke Dashboard';
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚙️ Pengaturan - License Manager</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="sidebar">
+        <div class="sb-brand"><h2>🔐 License Manager</h2><p>Roblox License System v1.0</p></div>
+        <div class="nav-sec">
+            <div class="nav-sec-title">Menu Utama</div>
+            <a href="dashboard.html" class="nav-item"><span class="nav-icon">📊</span> Dashboard</a>
+            <a href="systems.html" class="nav-item"><span class="nav-icon">🎮</span> Kelola Sistem</a>
+            <a href="keys.html" class="nav-item"><span class="nav-icon">🔑</span> Lisensi Key</a>
+        </div>
+        <div class="nav-sec">
+            <div class="nav-sec-title">Monitoring</div>
+            <a href="logs.html" class="nav-item"><span class="nav-icon">📋</span> Log Aktivitas <span class="ndot"></span></a>
+            <a href="transfer.html" class="nav-item"><span class="nav-icon">🔄</span> Transfer Key</a>
+        </div>
+        <div class="nav-sec">
+            <div class="nav-sec-title">Lainnya</div>
+            <a href="settings.html" class="nav-item active"><span class="nav-icon">⚙️</span> Pengaturan</a>
+            <a href="#" class="nav-item" onclick="logout()"><span class="nav-icon">🚪</span> Keluar</a>
+        </div>
+    </aside>
+    <main class="main">
+        <div class="ph">
+            <div>
+                <h1>⚙️ <span>Pengaturan</span></h1>
+                <p class="ph-sub">Konfigurasi sistem lisensi Anda</p>
+            </div>
+        </div>
+
+        <div id="settings-alert" class="alert" style="display:none;margin-bottom:15px"></div>
+
+        <!-- Webhook -->
+        <div class="card">
+            <div class="card-head">
+                <div class="card-title">🔗 Discord Webhook</div>
+                <button class="btn btn-success btn-sm" onclick="saveWebhook()">💾 Simpan</button>
+            </div>
+            <div class="card-body">
+                <div class="form-g">
+                    <label class="inp-label">URL Webhook Discord</label>
+                    <input type="text" class="inp" id="webhook-url" placeholder="https://discord.com/api/webhooks/...">
+                </div>
+                <button class="btn btn-gray btn-sm" onclick="testWebhook()" style="margin-bottom:20px">🧪 Test Webhook</button>
+                
+                <div style="font-size:13px;font-weight:600;margin-bottom:12px">📱 Preview Notifikasi Discord:</div>
+                <div class="dc-embed">
+                    <div class="dc-title" style="color:var(--green)">✅ Key Lisensi Diaktifkan</div>
+                    <div class="dc-fields">
+                        <div class="dc-field"><div class="df-name">👤 Pengguna</div><div class="df-val">PlayerBudi123</div></div>
+                        <div class="dc-field"><div class="df-name">🆔 User ID</div><div class="df-val">987654321</div></div>
+                        <div class="dc-field"><div class="df-name">🎮 Sistem</div><div class="df-val">Gun System Pro</div></div>
+                        <div class="dc-field"><div class="df-name">🗺️ Maps</div><div class="df-val">Battle Arena 2025</div></div>
+                        <div class="dc-field"><div class="df-name">📍 Place ID</div><div class="df-val">12345678</div></div>
+                        <div class="dc-field"><div class="df-name">📅 Waktu</div><div class="df-val">25 Jun 2025 • 14:30 WIB</div></div>
+                    </div>
+                </div>
+                <div class="dc-embed red" style="margin-top:10px">
+                    <div class="dc-title" style="color:var(--red)">🚫 PERCOBAAN BYPASS TERDETEKSI!</div>
+                    <div class="dc-fields">
+                        <div class="dc-field"><div class="df-name">👤 Pelaku</div><div class="df-val">HackerXYZ</div></div>
+                        <div class="dc-field"><div class="df-name">⚠️ Jenis</div><div class="df-val">Place ID Spoofing</div></div>
+                        <div class="dc-field"><div class="df-name">🛡️ Tindakan</div><div class="df-val">Key di-blacklist otomatis</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Password -->
+        <div class="card">
+            <div class="card-head">
+                <div class="card-title">🔒 Ganti Kata Sandi</div>
+                <button class="btn btn-success btn-sm" onclick="changePassword()">💾 Simpan</button>
+            </div>
+            <div class="card-body">
+                <div class="form-g">
+                    <label class="inp-label">Kata Sandi Lama</label>
+                    <input type="password" class="inp" id="old-pass" placeholder="Masukkan kata sandi lama...">
+                </div>
+                <div class="form-g">
+                    <label class="inp-label">Kata Sandi Baru</label>
+                    <input type="password" class="inp" id="new-pass" placeholder="Masukkan kata sandi baru...">
+                </div>
+                <div class="form-g">
+                    <label class="inp-label">Konfirmasi Kata Sandi Baru</label>
+                    <input type="password" class="inp" id="confirm-pass" placeholder="Ulangi kata sandi baru...">
+                </div>
+            </div>
+        </div>
+
+        <!-- API Info -->
+        <div class="card">
+            <div class="card-head">
+                <div class="card-title">🌐 Informasi API</div>
+            </div>
+            <div class="card-body">
+                <div class="form-g">
+                    <label class="inp-label">Base URL API Anda</label>
+                    <input type="text" class="inp" id="api-base-url" readonly style="opacity:0.6">
+                </div>
+                <div class="form-g">
+                    <label class="inp-label">API Secret Key (untuk script Roblox)</label>
+                    <div style="display:flex;gap:10px">
+                        <input type="text" class="inp" id="api-secret-display" readonly style="font-family:monospace;opacity:0.6">
+                        <button class="btn btn-warning btn-sm" onclick="copyApiSecret()">📋 Copy</button>
+                    </div>
+                </div>
+                <div style="padding:15px;background:var(--bg-input);border-radius:10px;border:1px solid var(--border)">
+                    <div style="font-size:13px;font-weight:600;margin-bottom:10px">📖 Endpoint Tersedia:</div>
+                    <div style="font-size:12px;color:var(--text3);line-height:2.2">
+                        <code style="color:var(--green)">POST</code> <code style="color:var(--cyan)">/api/activate</code> — Aktivasi key pertama kali<br>
+                        <code style="color:var(--blue)">POST</code> <code style="color:var(--cyan)">/api/verify</code> — Verifikasi key<br>
+                        <code style="color:var(--blue)">POST</code> <code style="color:var(--cyan)">/api/heartbeat</code> — Heartbeat check berkala<br>
+                        <code style="color:var(--orange)">POST</code> <code style="color:var(--cyan)">/api/transfer/request</code> — Minta transfer key
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<script src="js/app.js"></script>
+<script src="js/settings.js"></script>
+</body>
+</html>

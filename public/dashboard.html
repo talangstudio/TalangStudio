@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 Dashboard - License Manager</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sb-brand">
+            <h2>🔐 License Manager</h2>
+            <p>Roblox License System v1.0</p>
+        </div>
+        <div class="nav-sec">
+            <div class="nav-sec-title">Menu Utama</div>
+            <a href="dashboard.html" class="nav-item active"><span class="nav-icon">📊</span> Dashboard</a>
+            <a href="systems.html" class="nav-item"><span class="nav-icon">🎮</span> Kelola Sistem</a>
+            <a href="keys.html" class="nav-item"><span class="nav-icon">🔑</span> Lisensi Key <span class="nav-badge" id="badge-keys">0</span></a>
+        </div>
+        <div class="nav-sec">
+            <div class="nav-sec-title">Monitoring</div>
+            <a href="logs.html" class="nav-item"><span class="nav-icon">📋</span> Log Aktivitas <span class="ndot"></span></a>
+            <a href="transfer.html" class="nav-item"><span class="nav-icon">🔄</span> Transfer Key <span class="nav-badge" id="badge-transfer">0</span></a>
+        </div>
+        <div class="nav-sec">
+            <div class="nav-sec-title">Lainnya</div>
+            <a href="settings.html" class="nav-item"><span class="nav-icon">⚙️</span> Pengaturan</a>
+            <a href="#" class="nav-item" onclick="logout()"><span class="nav-icon">🚪</span> Keluar</a>
+        </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+        <div class="ph">
+            <div>
+                <h1>📊 <span>Dashboard</span></h1>
+                <p class="ph-sub">Ringkasan keseluruhan sistem lisensi Anda</p>
+            </div>
+            <div style="text-align:right">
+                <div style="font-size:11px;color:var(--text3)">Terakhir diperbarui</div>
+                <div style="font-size:13px;color:var(--cyan)" id="last-update">-</div>
+            </div>
+        </div>
+
+        <!-- STATS -->
+        <div class="stats">
+            <div class="stat blue">
+                <div class="stat-icon">🔑</div>
+                <div class="stat-val" id="stat-total">-</div>
+                <div class="stat-lbl">Total Key</div>
+            </div>
+            <div class="stat green">
+                <div class="stat-icon">✅</div>
+                <div class="stat-val" id="stat-active">-</div>
+                <div class="stat-lbl">Key Aktif</div>
+            </div>
+            <div class="stat cyan">
+                <div class="stat-icon">📦</div>
+                <div class="stat-val" id="stat-unused">-</div>
+                <div class="stat-lbl">Belum Dipakai</div>
+            </div>
+            <div class="stat red">
+                <div class="stat-icon">🚫</div>
+                <div class="stat-val" id="stat-revoked">-</div>
+                <div class="stat-lbl">Dicabut/Blacklist</div>
+            </div>
+            <div class="stat purple">
+                <div class="stat-icon">🎮</div>
+                <div class="stat-val" id="stat-systems">-</div>
+                <div class="stat-lbl">Total Sistem</div>
+            </div>
+            <div class="stat yellow">
+                <div class="stat-icon">⚠️</div>
+                <div class="stat-val" id="stat-bypass">-</div>
+                <div class="stat-lbl">Percobaan Bypass</div>
+            </div>
+        </div>
+
+        <!-- RECENT LOGS -->
+        <div class="card">
+            <div class="card-head">
+                <div class="card-title">📋 Aktivitas Terbaru</div>
+                <a href="logs.html" class="btn btn-gray btn-sm">Lihat Semua →</a>
+            </div>
+            <div class="card-body" id="recent-logs">
+                <div class="loading">⏳ Memuat...</div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>
